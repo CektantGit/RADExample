@@ -374,6 +374,11 @@ h1 {
   gap: 2rem;
 }
 
+.product-page-embedded .split-grid {
+  grid-template-columns: 1fr;
+}
+
+
 .embedded-shell {
   min-height: 760px;
   overflow: hidden;
