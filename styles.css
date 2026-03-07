@@ -111,6 +111,10 @@ h1 {
   margin: 1rem 0 1.8rem;
 }
 
+.mobile-scroll-cta {
+  display: none;
+}
+
 .cards-section {
   padding: 0 0 4.5rem;
 }
@@ -405,14 +409,30 @@ h1 {
     width: min(1120px, calc(100vw - 1.5rem));
   }
 
+  .header-inner {
+    min-height: 64px;
+    gap: 0.45rem;
+  }
+
+  .brand {
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
   nav {
-    gap: 0.75rem;
-    flex-wrap: wrap;
+    gap: 0.45rem;
+    flex-wrap: nowrap;
     justify-content: flex-end;
   }
 
   nav a {
-    font-size: 0.85rem;
+    font-size: 0.72rem;
+    white-space: nowrap;
+  }
+
+  .mobile-scroll-cta {
+    display: inline-flex;
   }
 
   .hero {
