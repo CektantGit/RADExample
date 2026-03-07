@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Embedded Integration Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html">AURELIA HOME</a>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="redirect.html">Redirect</a>
+          <a href="iframe.html">iFrame Overlay</a>
+          <a class="active" href="embedded.html">Embedded</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="product-page product-page-embedded">
+      <div class="container split-grid">
+        <section class="product-details">
+          <p class="eyebrow">Custom living collection</p>
+          <h1>Aurelia Modular Sofa</h1>
+          <p class="description">
+            Present customization as part of the shopping flow by embedding the configurator directly
+            in the product template.
+          </p>
+
+          <div class="price-row">
+            <span class="price">$2,490</span>
+            <span class="price-note">Starting price · Made to order</span>
+          </div>
+
+          <ul class="feature-list">
+            <li>Real-time product customization in-page</li>
+            <li>Consistent storefront and brand context</li>
+            <li>Ideal for seamless conversion journeys</li>
+          </ul>
+
+          <div class="cta-group">
+            <button class="btn btn-primary" type="button">Proceed to Checkout</button>
+            <button class="btn btn-ghost" type="button">Save Configuration</button>
+          </div>
+
+          <aside class="integration-note" aria-label="Integration details">
+            <h2>Integration Type: Embedded</h2>
+            <p>
+              The configurator is loaded immediately inside the product layout, creating a native,
+              continuous purchase experience.
+            </p>
+          </aside>
+        </section>
+
+        <section class="embedded-shell" aria-label="Embedded configurator">
+          <iframe
+            title="Embedded Vizbl Configurator"
+            src="https://configurator.vizbl.com/0affd758-2fd5-423c-b628-b9b726965c45"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+          ></iframe>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
