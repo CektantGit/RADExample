@@ -1,15 +1,15 @@
 :root {
-  --bg: #f5f4f1;
+  --bg: #f3f6fa;
   --surface: #ffffff;
-  --surface-soft: #f8f8f7;
-  --text: #1d1d1f;
-  --muted: #5f6167;
-  --border: #e6e5e2;
-  --primary: #1d1d1f;
-  --primary-hover: #000000;
-  --accent: #b08a55;
+  --surface-soft: #f6f8fb;
+  --text: #1b1b1b;
+  --muted: #484848;
+  --border: #cdcdcd;
+  --primary: #0067b8;
+  --primary-hover: #005a9e;
+  --accent: #0078d4;
   --radius: 18px;
-  --shadow: 0 12px 35px rgba(20, 21, 26, 0.09);
+  --shadow: 0 12px 35px rgba(33, 79, 135, 0.07);
 }
 
 * {
@@ -40,8 +40,8 @@ a {
   top: 0;
   z-index: 30;
   backdrop-filter: blur(10px);
-  background: rgba(245, 244, 241, 0.86);
-  border-bottom: 1px solid rgba(230, 229, 226, 0.8);
+  background: rgba(243, 246, 250, 0.93);
+  border-bottom: 1px solid rgba(205, 205, 205, 0.8);
 }
 
 .header-inner {
@@ -56,6 +56,7 @@ a {
   font-weight: 800;
   letter-spacing: 0.08em;
   font-size: 0.9rem;
+  color: var(--primary);
 }
 
 nav {
@@ -73,7 +74,7 @@ nav a {
 
 nav a:hover,
 nav a.active {
-  color: var(--text);
+  color: var(--primary);
 }
 
 .hero {
@@ -81,7 +82,7 @@ nav a.active {
 }
 
 .hero-content {
-  background: linear-gradient(145deg, #fff, #f5f5f4);
+  background: linear-gradient(145deg, #fff, #f3f6fa);
   border: 1px solid var(--border);
   border-radius: 28px;
   box-shadow: var(--shadow);
@@ -198,17 +199,18 @@ h1 {
 }
 
 .btn-secondary {
-  background: #f3f3f2;
-  color: var(--text);
+  background: #e8f1fb;
+  color: var(--primary);
 }
 
 .btn-secondary:hover {
-  background: #ececeb;
+  background: #deecf9;
 }
 
 .btn-ghost {
   border: 1px solid var(--border);
   background: transparent;
+  color: var(--primary);
 }
 
 .product-page {
@@ -354,7 +356,6 @@ h1 {
   grid-template-columns: 1fr;
 }
 
-
 .embedded-shell {
   min-height: 760px;
   overflow: hidden;
@@ -366,8 +367,6 @@ h1 {
   .split-grid {
     grid-template-columns: 1fr;
   }
-
-
   .embedded-shell {
     min-height: 620px;
   }
@@ -377,37 +376,30 @@ h1 {
   .container {
     width: min(1120px, calc(100vw - 1.5rem));
   }
-
   .header-inner {
     min-height: 64px;
     gap: 0.45rem;
   }
-
   .brand {
     font-size: 0.72rem;
     letter-spacing: 0.05em;
     white-space: nowrap;
   }
-
   nav {
     gap: 0.45rem;
     flex-wrap: nowrap;
     justify-content: flex-end;
   }
-
   nav a {
     font-size: 0.72rem;
     white-space: nowrap;
   }
-
   .hero {
     padding-top: 3.2rem;
   }
-
   .product-page {
     padding-top: 1.6rem;
   }
-
   .overlay-panel {
     width: 98vw;
     height: 90vh;
