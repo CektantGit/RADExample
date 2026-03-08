@@ -1,42 +1,15 @@
 (() => {
   const CONFIGURATOR_URL = 'https://configurator.vizbl.com/0affd758-2fd5-423c-b628-b9b726965c45';
 
-  const guides = {
-    redirect: {
-      title: 'Redirect Integration Guide (Shopify)',
-      description: 'Best when you want the simplest setup: the product-page button opens Vizbl in a new tab.',
-      steps: [
-        'Open your product template in Shopify Theme Editor.',
-        'Add one Custom Liquid block and paste the code from Part 1.',
-        'Save and test the button on the live product page.',
-      ],
-      sections: [
-        {
-          label: 'Part 1 — Custom Liquid block (product page button)',
-          code: `<a href="${CONFIGURATOR_URL}" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#000;color:#fff;padding:16px 32px;font-size:16px;font-weight:600;border-radius:8px;text-decoration:none;">Open Configurator</a>`,
-        },
-      ],
-    },
-    'iframe-overlay': {
-      title: 'iFrame Overlay Integration Guide (Shopify)',
-      description: 'Best when you want users to stay on the same page and open Vizbl in a full-screen overlay.',
-      steps: [
-        'First: add Part 2 once in theme.liquid right before </body>.',
-        'Second: add Part 1 in a Custom Liquid block on the product page.',
-        'Save and test: click the button, then close with X, backdrop click, and Escape key.',
-      ],
-      sections: [
-        {
-          label: 'Part 1 — Custom Liquid block (product page button)',
-          code: `<button type="button" id="vizbl-open-configurator" style="background-color:#000;color:#fff;padding:16px 32px;font-size:16px;font-weight:600;border:none;border-radius:8px;cursor:pointer;transition:all .3s ease;width:100%;margin:10px 0;">Open Configurator</button>
+  const redirectButtonCode = `<a href="${CONFIGURATOR_URL}" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#000;color:#fff;padding:16px 32px;font-size:16px;font-weight:600;border-radius:8px;text-decoration:none;">Open Configurator</a>`;
+
+  const iframeButtonCode = `<button type="button" id="vizbl-open-configurator" style="background-color:#000;color:#fff;padding:16px 32px;font-size:16px;font-weight:600;border:none;border-radius:8px;cursor:pointer;transition:all .3s ease;width:100%;margin:10px 0;">Open Configurator</button>
 <style>
 #vizbl-open-configurator:hover{background-color:#333;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.2);}
 #vizbl-open-configurator:active{transform:translateY(0);}
-<\/style>`,
-        },
-        {
-          label: 'Part 2 — theme.liquid (add once before </body>)',
-          code: `<div id="vizbl-configurator-overlay" aria-hidden="true" role="dialog" aria-label="Configurator overlay">
+<\/style>`;
+
+  const iframeOverlayContainerCode = `<div id="vizbl-configurator-overlay" aria-hidden="true" role="dialog" aria-label="Configurator overlay">
   <div data-vizbl-close-overlay></div>
   <div>
     <button type="button" aria-label="Close configurator" data-vizbl-close-overlay>×</button>
@@ -52,9 +25,9 @@
 #vizbl-configurator-overlay iframe{width:100%;height:100%;border:0;}
 #vizbl-configurator-overlay button[data-vizbl-close-overlay]{position:absolute;top:.8rem;right:.8rem;z-index:2;border:1px solid rgba(255,255,255,.3);width:38px;height:38px;border-radius:50%;background:rgba(15,15,16,.7);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer;}
 @media (max-width:640px){#vizbl-configurator-overlay>div:last-child{width:98vw;height:90vh;border-radius:10px;}}
-<\/style>
+<\/style>`;
 
-<script>
+  const iframeOverlayScriptCode = `<script>
 (() => {
   if (window.__vizblOverlayInit) return;
   window.__vizblOverlayInit = true;
@@ -67,22 +40,61 @@
   closeButtons.forEach((button) => button.addEventListener('click', closeOverlay));
   window.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeOverlay(); });
 })();
-<\/script>`,
+<\/script>`;
+
+  const embeddedCode = `<iframe src="${CONFIGURATOR_URL}" title="Embedded Vizbl Configurator" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" style="width:100%;min-height:700px;border:0;"></iframe>`;
+
+  const guides = {
+    redirect: {
+      title: 'Redirect Integration Guide (Shopify)',
+      description: 'Follow these steps from top to bottom.',
+      steps: [
+        {
+          title: 'Step 1 — Add the product-page button',
+          description: 'Open the product template in Shopify Theme Editor and add a Custom Liquid block.',
+          code: redirectButtonCode,
+        },
+        {
+          title: 'Step 2 — Save and test',
+          description: 'Keep this same code and verify that the button opens Vizbl in a new tab.',
+          code: redirectButtonCode,
+        },
+      ],
+    },
+    'iframe-overlay': {
+      title: 'iFrame Overlay Integration Guide (Shopify)',
+      description: 'Follow these steps in order. Each step matches one code block.',
+      steps: [
+        {
+          title: 'Step 1 — Add the product-page button',
+          description: 'In a product Custom Liquid block, add the button code.',
+          code: iframeButtonCode,
+        },
+        {
+          title: 'Step 2 — Add overlay container and styles',
+          description: 'In theme.liquid (before </body>), add the overlay HTML and style block.',
+          code: iframeOverlayContainerCode,
+        },
+        {
+          title: 'Step 3 — Add the overlay script',
+          description: 'Right below Step 2 code in theme.liquid, add this script block.',
+          code: iframeOverlayScriptCode,
         },
       ],
     },
     embedded: {
       title: 'Embedded Integration Guide (Shopify)',
-      description: 'Best when you want the configurator visible directly inside the product page layout.',
+      description: 'Follow these steps from top to bottom.',
       steps: [
-        'Open your product template in Shopify Theme Editor.',
-        'Add one Custom Liquid block and paste Part 1 code.',
-        'Save and check that the embedded iframe loads correctly on desktop and mobile.',
-      ],
-      sections: [
         {
-          label: 'Part 1 — Custom Liquid block (embedded iframe)',
-          code: `<iframe src="${CONFIGURATOR_URL}" title="Embedded Vizbl Configurator" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" style="width:100%;min-height:700px;border:0;"></iframe>`,
+          title: 'Step 1 — Add embedded iframe block',
+          description: 'Open the product template and add a Custom Liquid block where configurator should appear.',
+          code: embeddedCode,
+        },
+        {
+          title: 'Step 2 — Save and test',
+          description: 'Keep this same code and verify the iframe is visible on the product page.',
+          code: embeddedCode,
         },
       ],
     },
@@ -96,19 +108,21 @@
       .replaceAll('"', '&quot;');
 
   const buildGuideDocument = (guide) => {
-    const sections = guide.sections
+    const stepCards = guide.steps
       .map(
-        (section, index) => `
+        (step, index) => `
           <section class="card">
-            <h3>${escapeHtml(section.label)}</h3>
-            <button class="copy-btn" type="button" data-copy-target="code-${index}">Copy this part</button>
-            <pre id="code-${index}"><code>${escapeHtml(section.code)}</code></pre>
+            <div class="step-head">
+              <span class="step-badge">${index + 1}</span>
+              <h3>${escapeHtml(step.title)}</h3>
+            </div>
+            <p class="step-description">${escapeHtml(step.description)}</p>
+            <button class="copy-btn" type="button" data-copy-target="code-${index}">Copy this code</button>
+            <pre id="code-${index}"><code>${escapeHtml(step.code)}</code></pre>
           </section>
         `
       )
       .join('');
-
-    const steps = guide.steps.map((step) => `<li>${escapeHtml(step)}</li>`).join('');
 
     return `<!doctype html>
 <html lang="en">
@@ -118,13 +132,15 @@
     <title>${escapeHtml(guide.title)}</title>
     <style>
       body { margin: 0; font-family: Inter, system-ui, sans-serif; background: #f7f7f5; color: #1d1d1f; }
-      .wrap { padding: 20px; max-width: 980px; margin: 0 auto; }
-      h1 { margin: 0 0 10px; font-size: 28px; }
-      p { margin: 0 0 14px; color: #52545a; }
-      .note { background: #fff; border: 1px solid #e6e5e2; border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; }
-      .note ol { margin: 10px 0 0 20px; }
-      .card { background: #fff; border: 1px solid #e6e5e2; border-radius: 14px; padding: 14px; margin-bottom: 14px; }
-      .card h3 { margin: 0 0 10px; font-size: 16px; }
+      .wrap { padding: 24px; max-width: 980px; margin: 0 auto; }
+      h1 { margin: 0 0 8px; font-size: 28px; }
+      .desc { margin: 0 0 14px; color: #52545a; }
+      .meta { background: #fff; border: 1px solid #e6e5e2; border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; color: #47494f; }
+      .card { background: #fff; border: 1px solid #e6e5e2; border-radius: 14px; padding: 16px; margin-bottom: 14px; }
+      .step-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+      .step-badge { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: #111; color: #fff; font-weight: 700; font-size: 13px; }
+      .card h3 { margin: 0; font-size: 16px; }
+      .step-description { margin: 0 0 12px; color: #555860; line-height: 1.5; }
       .copy-btn { background: #111; color: #fff; border: 0; border-radius: 8px; padding: 8px 12px; font-weight: 600; cursor: pointer; margin-bottom: 10px; }
       pre { margin: 0; background: #111; color: #f2f2f2; border-radius: 10px; padding: 12px; overflow: auto; max-height: min(46vh, 420px); font-size: 12px; line-height: 1.45; border: 1px solid #2c2c2c; }
       pre code { display: block; min-width: max-content; }
@@ -138,13 +154,9 @@
   <body>
     <div class="wrap">
       <h1>${escapeHtml(guide.title)}</h1>
-      <p>${escapeHtml(guide.description)}</p>
-      <div class="note">
-        <strong>Installation steps</strong>
-        <ol>${steps}</ol>
-        <p style="margin-top:10px;">Configurator URL: <a href="${CONFIGURATOR_URL}" target="_blank" rel="noopener noreferrer">${CONFIGURATOR_URL}</a></p>
-      </div>
-      ${sections}
+      <p class="desc">${escapeHtml(guide.description)}</p>
+      <div class="meta">Configurator URL: <a href="${CONFIGURATOR_URL}" target="_blank" rel="noopener noreferrer">${CONFIGURATOR_URL}</a></div>
+      ${stepCards}
       <p class="status" id="copy-status"></p>
     </div>
 
