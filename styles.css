@@ -221,7 +221,11 @@ h1 {
   gap: 2.25rem;
 }
 
-.product-media,
+.single-column .product-grid {
+  grid-template-columns: 1fr;
+  max-width: 760px;
+}
+
 .product-details,
 .embedded-shell {
   background: var(--surface);
@@ -230,67 +234,8 @@ h1 {
   box-shadow: var(--shadow);
 }
 
-.product-media,
 .product-details {
   padding: 1.4rem;
-}
-
-.product-image {
-  min-height: 460px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-}
-
-.placeholder-gradient {
-  background: radial-gradient(circle at 30% 30%, #d4c1a6 0%, #b89f7f 25%, #8e7b63 68%, #6f6151 100%);
-}
-
-.thumb-row {
-  display: flex;
-  gap: 0.7rem;
-  margin-top: 0.9rem;
-}
-
-.thumb {
-  height: 9px;
-  width: 34px;
-  border-radius: 999px;
-  background: #d2d2d0;
-}
-
-.thumb.active {
-  background: #8f7650;
-}
-
-.preview-card {
-  height: 100%;
-  display: grid;
-  align-content: center;
-  justify-items: center;
-  gap: 0.35rem;
-  text-align: center;
-  color: #fff;
-  padding: 1rem;
-}
-
-.preview-label {
-  margin: 0 0 0.4rem;
-  font-size: 0.76rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  opacity: 0.9;
-}
-
-.preview-line {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.preview-arrow {
-  margin: 0.25rem 0;
-  font-size: 1.5rem;
-  font-weight: 700;
 }
 
 .close-example {
@@ -422,9 +367,6 @@ h1 {
     grid-template-columns: 1fr;
   }
 
-  .product-image {
-    min-height: 320px;
-  }
 
   .embedded-shell {
     min-height: 620px;
