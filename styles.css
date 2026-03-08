@@ -112,7 +112,7 @@ h1 {
 }
 
 .mobile-scroll-cta {
-  display: none;
+  display: inline-flex;
 }
 
 .cards-section {
@@ -262,25 +262,52 @@ h1 {
   background: #8f7650;
 }
 
-.description {
-  color: var(--muted);
-  line-height: 1.65;
-}
-
-.price-row {
-  margin: 1.2rem 0;
+.preview-card {
+  height: 100%;
   display: grid;
-  gap: 0.2rem;
+  align-content: center;
+  justify-items: center;
+  gap: 0.35rem;
+  text-align: center;
+  color: #fff;
+  padding: 1rem;
 }
 
-.price {
-  font-size: 2rem;
+.preview-label {
+  margin: 0 0 0.4rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.preview-line {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.preview-arrow {
+  margin: 0.25rem 0;
+  font-size: 1.5rem;
   font-weight: 700;
 }
 
-.price-note {
+.close-example {
+  display: inline-block;
+  margin-bottom: 0.5rem;
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+.mini-heading {
+  margin: 1.2rem 0 0.7rem;
+  font-size: 1rem;
+}
+
+.description {
+  color: var(--muted);
+  line-height: 1.65;
 }
 
 .feature-list {
@@ -429,10 +456,6 @@ h1 {
   nav a {
     font-size: 0.72rem;
     white-space: nowrap;
-  }
-
-  .mobile-scroll-cta {
-    display: inline-flex;
   }
 
   .hero {

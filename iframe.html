@@ -27,38 +27,34 @@
     <main class="product-page">
       <div class="container product-grid">
         <section class="product-media" aria-label="Integration preview image">
-          <div class="product-image placeholder-gradient"></div>
-          <div class="thumb-row">
-            <span class="thumb active"></span><span class="thumb"></span><span class="thumb"></span>
+          <div class="product-image placeholder-gradient">
+            <div class="preview-card">
+              <p class="preview-label">Overlay flow</p>
+              <p class="preview-line">Store page remains visible</p>
+              <p class="preview-arrow">＋</p>
+              <p class="preview-line">Full-screen iframe modal</p>
+            </div>
           </div>
         </section>
 
         <section class="product-details">
-          <p class="eyebrow">RAD integration example</p>
-          <h1>Integration Type: iFrame Overlay</h1>
+          <p class="eyebrow">RAD Integration Example</p>
+          <h1>Overlay Integration</h1>
           <p class="description">
-            Keep users on the same RAD page while opening the Vizbl configurator in a full-screen
-            overlay iframe.
+            Opens the Vizbl configurator in a full-screen overlay while users stay on the same page.
           </p>
 
+          <h2 class="mini-heading">Why use this method</h2>
           <ul class="feature-list">
-            <li>No navigation break from the storefront</li>
-            <li>Immersive full-screen configurator experience</li>
-            <li>Close and return to the same page state instantly</li>
+            <li>No navigation away from the storefront</li>
+            <li>Full-screen configurator experience</li>
+            <li>Close the overlay and continue browsing instantly</li>
           </ul>
 
           <div class="cta-group">
             <button class="btn btn-primary" type="button" data-open-overlay>Open Configurator</button>
             <a class="btn btn-ghost" href="index.html">All Integration Types</a>
           </div>
-
-          <aside class="integration-note" aria-label="Integration details">
-            <h2>Integration Type: iFrame Overlay (RAD Example)</h2>
-            <p>
-              The configurator opens in a modal overlay above your store interface. Users can configure,
-              close the overlay, and continue shopping without a full page reload.
-            </p>
-          </aside>
         </section>
       </div>
     </main>
