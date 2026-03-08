@@ -1,15 +1,15 @@
 :root {
-  --bg: #f5f4f1;
+  --bg: #f3f0e9;
   --surface: #ffffff;
-  --surface-soft: #f8f8f7;
-  --text: #1d1d1f;
-  --muted: #5f6167;
-  --border: #e6e5e2;
-  --primary: #1d1d1f;
-  --primary-hover: #000000;
-  --accent: #b08a55;
+  --surface-soft: #f7f4ef;
+  --text: #555147;
+  --muted: #ab9280;
+  --border: #e0d7cb;
+  --primary: #da7357;
+  --primary-hover: #b85d43;
+  --accent: #b4976b;
   --radius: 18px;
-  --shadow: 0 12px 35px rgba(20, 21, 26, 0.09);
+  --shadow: 0 12px 35px rgba(200, 180, 140, 0.09);
 }
 
 * {
@@ -40,8 +40,8 @@ a {
   top: 0;
   z-index: 30;
   backdrop-filter: blur(10px);
-  background: rgba(245, 244, 241, 0.86);
-  border-bottom: 1px solid rgba(230, 229, 226, 0.8);
+  background: rgba(243, 240, 233, 0.92);
+  border-bottom: 1px solid rgba(224, 215, 203, 0.75);
 }
 
 .header-inner {
@@ -81,7 +81,7 @@ nav a.active {
 }
 
 .hero-content {
-  background: linear-gradient(145deg, #fff, #f5f5f4);
+  background: linear-gradient(145deg, #fff, #f7f4ef);
   border: 1px solid var(--border);
   border-radius: 28px;
   box-shadow: var(--shadow);
@@ -198,12 +198,12 @@ h1 {
 }
 
 .btn-secondary {
-  background: #f3f3f2;
+  background: #f7ede2;
   color: var(--text);
 }
 
 .btn-secondary:hover {
-  background: #ececeb;
+  background: #f3e6d7;
 }
 
 .btn-ghost {
@@ -307,7 +307,7 @@ h1 {
 .overlay-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(14, 14, 16, 0.7);
+  background: rgba(168, 143, 110, 0.23);
 }
 
 .overlay-panel {
@@ -316,9 +316,9 @@ h1 {
   height: min(88vh, 920px);
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid #2f2f34;
-  box-shadow: 0 28px 50px rgba(0, 0, 0, 0.35);
-  background: #121316;
+  border: 1px solid #cfb391;
+  box-shadow: 0 28px 50px rgba(184, 163, 133, 0.19);
+  background: #fcf7f1;
 }
 
 .overlay-panel iframe,
@@ -333,12 +333,12 @@ h1 {
   top: 0.8rem;
   right: 0.8rem;
   z-index: 2;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(200, 176, 128, 0.22);
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: rgba(15, 15, 16, 0.7);
-  color: #fff;
+  background: rgba(218, 115, 87, 0.13);
+  color: #b85d43;
   font-size: 1.4rem;
   line-height: 1;
   cursor: pointer;
@@ -354,7 +354,6 @@ h1 {
   grid-template-columns: 1fr;
 }
 
-
 .embedded-shell {
   min-height: 760px;
   overflow: hidden;
@@ -366,8 +365,6 @@ h1 {
   .split-grid {
     grid-template-columns: 1fr;
   }
-
-
   .embedded-shell {
     min-height: 620px;
   }
