@@ -1,12 +1,12 @@
 (() => {
   const snippets = {
     redirect: `<a href="https://configurator.vizbl.com/0affd758-2fd5-423c-b628-b9b726965c45" target="_blank" rel="noopener noreferrer">Open Configurator</a>`,
-    'iframe-overlay': `<button type="button" data-open-overlay>Open Configurator</button>
+    'iframe-overlay': `<button type="button" id="vizbl-open-configurator">Open Configurator</button>
 
-<div class="overlay" id="configurator-overlay" aria-hidden="true" role="dialog" aria-label="Configurator overlay">
-  <div class="overlay-backdrop" data-close-overlay></div>
-  <div class="overlay-panel">
-    <button class="overlay-close" type="button" aria-label="Close configurator" data-close-overlay>×</button>
+<div id="vizbl-configurator-overlay" aria-hidden="true" role="dialog" aria-label="Configurator overlay">
+  <div data-vizbl-close-overlay></div>
+  <div>
+    <button type="button" aria-label="Close configurator" data-vizbl-close-overlay>×</button>
     <iframe
       title="Vizbl Configurator"
       src="https://configurator.vizbl.com/0affd758-2fd5-423c-b628-b9b726965c45"
@@ -16,29 +16,99 @@
   </div>
 </div>
 
+<style>
+  #vizbl-configurator-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  #vizbl-configurator-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #vizbl-configurator-overlay > [data-vizbl-close-overlay] {
+    position: absolute;
+    inset: 0;
+    background: rgba(14, 14, 16, 0.72);
+  }
+
+  #vizbl-configurator-overlay > div:last-child {
+    position: relative;
+    width: min(1280px, 96vw);
+    height: min(88vh, 920px);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #2f2f34;
+    box-shadow: 0 28px 50px rgba(0, 0, 0, 0.35);
+    background: #121316;
+  }
+
+  #vizbl-configurator-overlay iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  #vizbl-configurator-overlay button[data-vizbl-close-overlay] {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    z-index: 2;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(15, 15, 16, 0.7);
+    color: #fff;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  @media (max-width: 640px) {
+    #vizbl-configurator-overlay > div:last-child {
+      width: 98vw;
+      height: 90vh;
+      border-radius: 10px;
+    }
+  }
+</style>
+
 <script>
-  const overlay = document.getElementById('configurator-overlay');
-  const openButton = document.querySelector('[data-open-overlay]');
-  const closeButtons = overlay.querySelectorAll('[data-close-overlay]');
+  (() => {
+    if (window.__vizblOverlayInit) return;
+    window.__vizblOverlayInit = true;
 
-  const openOverlay = () => {
-    overlay.classList.add('is-open');
-    overlay.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  };
+    const overlay = document.getElementById('vizbl-configurator-overlay');
+    const openButton = document.getElementById('vizbl-open-configurator');
+    const closeButtons = overlay?.querySelectorAll('[data-vizbl-close-overlay]') || [];
 
-  const closeOverlay = () => {
-    overlay.classList.remove('is-open');
-    overlay.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  };
+    const openOverlay = () => {
+      overlay.classList.add('is-open');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
 
-  openButton?.addEventListener('click', openOverlay);
-  closeButtons.forEach((button) => button.addEventListener('click', closeOverlay));
+    const closeOverlay = () => {
+      overlay.classList.remove('is-open');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
 
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') closeOverlay();
-  });
+    openButton?.addEventListener('click', openOverlay);
+    closeButtons.forEach((button) => button.addEventListener('click', closeOverlay));
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeOverlay();
+    });
+  })();
 <\/script>`,
     embedded: `<iframe
   src="https://configurator.vizbl.com/0affd758-2fd5-423c-b628-b9b726965c45"
