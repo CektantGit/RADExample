@@ -238,13 +238,6 @@ h1 {
   padding: 1.4rem;
 }
 
-.close-example {
-  display: inline-block;
-  margin-bottom: 0.5rem;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
 .mini-heading {
   margin: 1.2rem 0 0.7rem;
   font-size: 1rem;
@@ -267,6 +260,13 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+}
+
+.copy-status {
+  margin: 0.8rem 0 0;
+  min-height: 1.2em;
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 .integration-note {
