@@ -112,7 +112,7 @@
         const codeHtml = step.code
           ? `<button class="copy-btn" type="button" data-copy-target="code-${index}">Copy this code</button>
             <pre id="code-${index}"><code>${escapeHtml(step.code)}</code></pre>`
-          : `<p class="no-code">No code needed for this step.</p>`;
+          : ``;
 
         return `
           <section class="card">
@@ -151,7 +151,6 @@
       pre::-webkit-scrollbar-thumb { background: #4b4b4b; border-radius: 999px; }
       pre::-webkit-scrollbar-track { background: #1b1b1b; border-radius: 999px; }
       .status { min-height: 1.2em; color: #52545a; font-size: 13px; margin-top: 10px; }
-      .no-code { margin: 0; padding: 10px 12px; border-radius: 8px; background: #f3f3f2; color: #4f5258; font-size: 13px; }
       a { color: #1d1d1f; }
     </style>
   </head>
