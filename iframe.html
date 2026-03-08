@@ -3,19 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>iFrame Overlay Integration Demo</title>
+    <title>iFrame Overlay Integration Demo – Microsoft Styling</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="index.html">Vizbl integration</a>
+        <a class="brand" href="index.html">Vizbl Integrations</a>
         <nav>
           <a href="redirect.html">Redirect</a>
           <a class="active" href="iframe.html">iFrame Overlay</a>
@@ -23,33 +20,28 @@
         </nav>
       </div>
     </header>
-
     <main class="product-page single-column">
       <div class="container product-grid">
-
         <section class="product-details">
-          <p class="eyebrow">RAD Integration Example</p>
-          <h1>Overlay Integration</h1>
+          <p class="eyebrow">Microsoft-Themed Demo</p>
+          <h1>Overlay Integration for Microsoft Storefronts</h1>
           <p class="description">
-            Opens the Vizbl configurator in a full-screen overlay while users stay on the same page.
+            Opens the Vizbl configurator in a modal overlay, matching modern Microsoft surfaces and button treatment. Keep users on your Microsoft-style page with a full-screen in-context experience.
           </p>
-
-          <h2 class="mini-heading">Why use this method</h2>
+          <h2 class="mini-heading">When to use this method</h2>
           <ul class="feature-list">
-            <li>No navigation away from the storefront</li>
-            <li>Full-screen configurator experience</li>
-            <li>Close the overlay and continue browsing instantly</li>
+            <li>No navigation away from your main store page</li>
+            <li>Smooth full-page overlay, styled for Microsoft</li>
+            <li>Easy return to product details on close</li>
           </ul>
-
           <div class="cta-group">
-            <button class="btn btn-primary" type="button" data-open-overlay>Open Configurator</button>
-            <a class="btn btn-ghost" href="index.html">All Integration Types</a>
-            <button class="btn btn-secondary" type="button" data-copy-code="iframe-overlay">Integration Guide</button>
+            <button class="btn btn-primary" type="button" data-open-overlay>Open Configurator Overlay</button>
+            <a class="btn btn-ghost" href="index.html">All Vizbl Integration Types</a>
+            <button class="btn btn-secondary" type="button" data-copy-code="iframe-overlay">Show Setup Guide</button>
           </div>
         </section>
       </div>
     </main>
-
     <div class="overlay" id="configurator-overlay" aria-hidden="true" role="dialog" aria-label="Configurator overlay">
       <div class="overlay-backdrop" data-close-overlay></div>
       <div class="overlay-panel">
@@ -58,11 +50,10 @@
           title="Vizbl Configurator"
           src="https://configurator.vizbl.com/0affd758-2fd5-423c-b628-b9b726965c45"
           loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"
-        ></iframe>
+          referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
       </div>
     </div>
-
     <script src="script.js"></script>
   </body>
 </html>
