@@ -1,15 +1,15 @@
 :root {
-  --bg: #f5f4f1;
+  --bg: #f4fafd;
   --surface: #ffffff;
-  --surface-soft: #f8f8f7;
-  --text: #1d1d1f;
-  --muted: #5f6167;
-  --border: #e6e5e2;
-  --primary: #1d1d1f;
-  --primary-hover: #000000;
-  --accent: #b08a55;
+  --surface-soft: #f7fbff;
+  --text: #1b1b1b;
+  --muted: #505a63;
+  --border: #d6e2ef;
+  --primary: #0067b8;
+  --primary-hover: #005592;
+  --accent: #0078d4;
   --radius: 18px;
-  --shadow: 0 12px 35px rgba(20, 21, 26, 0.09);
+  --shadow: 0 12px 35px rgba(0,60,136, 0.08);
 }
 
 * {
@@ -20,14 +20,19 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-family: "Segoe UI", "Inter", system-ui, -apple-system, Roboto, sans-serif;
   color: var(--text);
   background: var(--bg);
 }
 
 a {
-  color: inherit;
+  color: var(--primary);
   text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-hover);
 }
 
 .container {
@@ -40,8 +45,8 @@ a {
   top: 0;
   z-index: 30;
   backdrop-filter: blur(10px);
-  background: rgba(245, 244, 241, 0.86);
-  border-bottom: 1px solid rgba(230, 229, 226, 0.8);
+  background: rgba(244, 250, 253, 0.94);
+  border-bottom: 1px solid rgba(214,226,239, 0.8);
 }
 
 .header-inner {
@@ -53,9 +58,13 @@ a {
 }
 
 .brand {
-  font-weight: 800;
+  font-family: "Segoe UI Semibold", "Segoe UI", "Inter", system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  font-size: 1rem;
+  color: var(--primary);
+  text-shadow: 0 1px 0 #eaf6ff;
   letter-spacing: 0.08em;
-  font-size: 0.9rem;
 }
 
 nav {
@@ -68,12 +77,15 @@ nav a {
   color: var(--muted);
   font-weight: 500;
   font-size: 0.95rem;
-  transition: color 0.2s ease;
+  transition: color 0.2s, border-color 0.2s;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 3px;
 }
 
 nav a:hover,
 nav a.active {
-  color: var(--text);
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
 }
 
 .hero {
@@ -81,9 +93,9 @@ nav a.active {
 }
 
 .hero-content {
-  background: linear-gradient(145deg, #fff, #f5f5f4);
+  background: linear-gradient(145deg, #f7fbff, #e6f0fa 60%, #fff 100%);
   border: 1px solid var(--border);
-  border-radius: 28px;
+  border-radius: 26px;
   box-shadow: var(--shadow);
   padding: clamp(2rem, 4vw, 4rem);
 }
@@ -92,27 +104,36 @@ nav a.active {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent);
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   font-weight: 700;
   margin-bottom: 0.8rem;
 }
 
 h1 {
   margin: 0;
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-size: clamp(2.1rem, 4.5vw, 3.3rem);
   line-height: 1.07;
+  font-family: "Segoe UI Semibold", "Segoe UI", "Inter", system-ui, sans-serif;
+  letter-spacing: 0.02em;
 }
 
 .subhead {
   max-width: 62ch;
   color: var(--muted);
-  font-size: 1.08rem;
+  font-size: 1.12rem;
   line-height: 1.6;
   margin: 1rem 0 1.8rem;
 }
 
 .mobile-scroll-cta {
   display: inline-flex;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 999px;
+  border: none;
+  padding: 0.9rem 1.55rem;
+  text-shadow: none;
 }
 
 .cards-section {
@@ -120,12 +141,14 @@ h1 {
 }
 
 .section-heading {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.6rem;
 }
 
 .section-heading h2 {
-  font-size: clamp(1.5rem, 2vw, 2rem);
-  margin-bottom: 0.5rem;
+  font-size: clamp(1.5rem, 2vw, 2.1rem);
+  margin-bottom: 0.52rem;
+  color: var(--primary);
+  font-family: "Segoe UI Semibold", "Segoe UI", "Inter", system-ui, sans-serif;
 }
 
 .section-heading p {
@@ -136,7 +159,7 @@ h1 {
 .integration-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 1.1rem;
 }
 
 .integration-card {
@@ -148,11 +171,18 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  transition: box-shadow 0.18s, border 0.18s;
+}
+
+.integration-card:hover {
+  box-shadow: 0 8px 32px rgba(0,103,184, 0.10);
+  border-color: #aad4f6;
 }
 
 .integration-card h3 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.18rem;
+  font-weight: 600;
 }
 
 .integration-card p {
@@ -172,43 +202,53 @@ h1 {
 }
 
 .btn {
-  border: 0;
+  border: none;
   border-radius: 999px;
-  padding: 0.82rem 1.2rem;
-  font-size: 0.95rem;
+  padding: 0.84rem 1.26rem;
+  font-family: "Segoe UI Semibold", "Segoe UI", "Inter", system-ui, sans-serif;
+  font-size: 0.98rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease;
+  transition: transform 0.15s, background 0.2s, color 0.2s;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  letter-spacing: 0.01em;
 }
 
-.btn:hover {
-  transform: translateY(-1px);
+.btn:active {
+  transform: scale(0.98);
 }
 
 .btn-primary {
   background: var(--primary);
   color: #fff;
+  box-shadow: 0 1px 8px 0 rgba(34,113,191,0.10);
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.mobile-scroll-cta:hover {
   background: var(--primary-hover);
 }
 
 .btn-secondary {
-  background: #f3f3f2;
-  color: var(--text);
+  background: #e8f1fb;
+  color: var(--primary);
+  border: 1px solid #bce0fa;
 }
 
 .btn-secondary:hover {
-  background: #ececeb;
+  background: #cbe6fa;
 }
 
 .btn-ghost {
   border: 1px solid var(--border);
   background: transparent;
+  color: var(--primary);
+}
+
+.btn-ghost:hover {
+  background: #eaf3fc;
 }
 
 .product-page {
@@ -217,8 +257,8 @@ h1 {
 
 .product-grid {
   display: grid;
-  grid-template-columns: minmax(320px, 1.02fr) minmax(320px, 0.98fr);
-  gap: 2.25rem;
+  grid-template-columns: minmax(320px, 1.01fr) minmax(320px, 0.99fr);
+  gap: 2.2rem;
 }
 
 .single-column .product-grid {
@@ -235,17 +275,20 @@ h1 {
 }
 
 .product-details {
-  padding: 1.4rem;
+  padding: 1.44rem;
 }
 
 .mini-heading {
   margin: 1.2rem 0 0.7rem;
-  font-size: 1rem;
+  font-size: 1.02rem;
+  color: var(--primary);
+  font-family: "Segoe UI Semibold", "Segoe UI", "Inter", system-ui, sans-serif;
 }
 
 .description {
   color: var(--muted);
-  line-height: 1.65;
+  line-height: 1.62;
+  font-size: 1.06rem;
 }
 
 .feature-list {
@@ -259,19 +302,19 @@ h1 {
 .cta-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.76rem;
 }
 
 .copy-status {
-  margin: 0.8rem 0 0;
+  margin: 0.85rem 0 0;
   min-height: 1.2em;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.93rem;
 }
 
 .integration-note {
   margin-top: 1.25rem;
-  padding: 1rem;
+  padding: 1.02rem;
   border: 1px solid var(--border);
   background: var(--surface-soft);
   border-radius: 12px;
@@ -307,7 +350,7 @@ h1 {
 .overlay-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(14, 14, 16, 0.7);
+  background: rgba(14, 30, 53, 0.60);
 }
 
 .overlay-panel {
@@ -316,9 +359,9 @@ h1 {
   height: min(88vh, 920px);
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid #2f2f34;
-  box-shadow: 0 28px 50px rgba(0, 0, 0, 0.35);
-  background: #121316;
+  border: 1.5px solid #c0daf5;
+  box-shadow: 0 28px 50px rgba(0, 103, 184, 0.22);
+  background: #f7fbff;
 }
 
 .overlay-panel iframe,
@@ -326,6 +369,7 @@ h1 {
   width: 100%;
   height: 100%;
   border: 0;
+  background: #f7fbff;
 }
 
 .overlay-close {
@@ -333,13 +377,13 @@ h1 {
   top: 0.8rem;
   right: 0.8rem;
   z-index: 2;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(31, 123, 183, 0.35);
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: rgba(15, 15, 16, 0.7);
-  color: #fff;
-  font-size: 1.4rem;
+  background: rgba(231, 247, 255, 0.84);
+  color: var(--primary);
+  font-size: 1.35rem;
   line-height: 1;
   cursor: pointer;
 }
@@ -354,7 +398,6 @@ h1 {
   grid-template-columns: 1fr;
 }
 
-
 .embedded-shell {
   min-height: 760px;
   overflow: hidden;
@@ -366,8 +409,6 @@ h1 {
   .split-grid {
     grid-template-columns: 1fr;
   }
-
-
   .embedded-shell {
     min-height: 620px;
   }
@@ -379,33 +420,34 @@ h1 {
   }
 
   .header-inner {
-    min-height: 64px;
+    min-height: 61px;
     gap: 0.45rem;
   }
 
   .brand {
-    font-size: 0.72rem;
+    font-size: 0.83rem;
     letter-spacing: 0.05em;
     white-space: nowrap;
   }
 
   nav {
-    gap: 0.45rem;
+    gap: 0.49rem;
     flex-wrap: nowrap;
     justify-content: flex-end;
   }
 
   nav a {
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     white-space: nowrap;
+    padding-bottom: 2px;
   }
 
   .hero {
-    padding-top: 3.2rem;
+    padding-top: 3.1rem;
   }
 
   .product-page {
-    padding-top: 1.6rem;
+    padding-top: 1.52rem;
   }
 
   .overlay-panel {
