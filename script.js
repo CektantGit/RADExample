@@ -4,47 +4,84 @@
   const guides = {
     redirect: {
       title: 'Redirect Integration Guide (Shopify)',
-      description: 'This method opens the configurator in a new tab from a product-page button.',
+      description: 'Best when you want the simplest setup: the product-page button opens Vizbl in a new tab.',
       steps: [
-        'Add the Custom Liquid snippet on the product template where the button should appear.',
-        'Save and publish. No global theme.liquid script is required for this method.',
+        'Open your product template in Shopify Theme Editor.',
+        'Add one Custom Liquid block and paste the code from Part 1.',
+        'Save and test the button on the live product page.',
       ],
       sections: [
         {
-          label: 'Part 1 — Custom Liquid block (product page)',
+          label: 'Part 1 — Custom Liquid block (product page button)',
           code: `<a href="${CONFIGURATOR_URL}" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#000;color:#fff;padding:16px 32px;font-size:16px;font-weight:600;border-radius:8px;text-decoration:none;">Open Configurator</a>`,
         },
       ],
     },
     'iframe-overlay': {
       title: 'iFrame Overlay Integration Guide (Shopify)',
-      description: 'This method keeps users on the same page and opens the configurator in a full-screen overlay modal.',
+      description: 'Best when you want users to stay on the same page and open Vizbl in a full-screen overlay.',
       steps: [
-        'Add Part 2 once in theme.liquid before </body>.',
-        'Add Part 1 via Custom Liquid block on any product page where you need the button.',
-        'Save both files and test on storefront.',
+        'First: add Part 2 once in theme.liquid right before </body>.',
+        'Second: add Part 1 in a Custom Liquid block on the product page.',
+        'Save and test: click the button, then close with X, backdrop click, and Escape key.',
       ],
       sections: [
         {
           label: 'Part 1 — Custom Liquid block (product page button)',
-          code: `<button type="button" id="vizbl-open-configurator" style="background-color:#000;color:#fff;padding:16px 32px;font-size:16px;font-weight:600;border:none;border-radius:8px;cursor:pointer;transition:all .3s ease;width:100%;margin:10px 0;">Open Configurator</button>\n<style>\n#vizbl-open-configurator:hover{background-color:#333;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.2);}\n#vizbl-open-configurator:active{transform:translateY(0);}\n<\/style>`,
+          code: `<button type="button" id="vizbl-open-configurator" style="background-color:#000;color:#fff;padding:16px 32px;font-size:16px;font-weight:600;border:none;border-radius:8px;cursor:pointer;transition:all .3s ease;width:100%;margin:10px 0;">Open Configurator</button>
+<style>
+#vizbl-open-configurator:hover{background-color:#333;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.2);}
+#vizbl-open-configurator:active{transform:translateY(0);}
+<\/style>`,
         },
         {
           label: 'Part 2 — theme.liquid (add once before </body>)',
-          code: `<div id="vizbl-configurator-overlay" aria-hidden="true" role="dialog" aria-label="Configurator overlay">\n  <div data-vizbl-close-overlay></div>\n  <div>\n    <button type="button" aria-label="Close configurator" data-vizbl-close-overlay>×</button>\n    <iframe title="Vizbl Configurator" src="${CONFIGURATOR_URL}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>\n  </div>\n</div>\n\n<style>\n#vizbl-configurator-overlay{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .25s ease;}\n#vizbl-configurator-overlay.is-open{opacity:1;pointer-events:auto;}\n#vizbl-configurator-overlay>[data-vizbl-close-overlay]{position:absolute;inset:0;background:rgba(14,14,16,.72);}\n#vizbl-configurator-overlay>div:last-child{position:relative;width:min(1280px,96vw);height:min(88vh,920px);border-radius:16px;overflow:hidden;border:1px solid #2f2f34;box-shadow:0 28px 50px rgba(0,0,0,.35);background:#121316;}\n#vizbl-configurator-overlay iframe{width:100%;height:100%;border:0;}\n#vizbl-configurator-overlay button[data-vizbl-close-overlay]{position:absolute;top:.8rem;right:.8rem;z-index:2;border:1px solid rgba(255,255,255,.3);width:38px;height:38px;border-radius:50%;background:rgba(15,15,16,.7);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer;}\n@media (max-width:640px){#vizbl-configurator-overlay>div:last-child{width:98vw;height:90vh;border-radius:10px;}}\n<\/style>\n\n<script>\n(() => {\n  if (window.__vizblOverlayInit) return;\n  window.__vizblOverlayInit = true;\n  const overlay = document.getElementById('vizbl-configurator-overlay');\n  const openButton = document.getElementById('vizbl-open-configurator');\n  const closeButtons = overlay?.querySelectorAll('[data-vizbl-close-overlay]') || [];\n  const openOverlay = () => { overlay.classList.add('is-open'); overlay.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; };\n  const closeOverlay = () => { overlay.classList.remove('is-open'); overlay.setAttribute('aria-hidden','true'); document.body.style.overflow=''; };\n  openButton?.addEventListener('click', openOverlay);\n  closeButtons.forEach((button) => button.addEventListener('click', closeOverlay));\n  window.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeOverlay(); });\n})();\n<\/script>`,
+          code: `<div id="vizbl-configurator-overlay" aria-hidden="true" role="dialog" aria-label="Configurator overlay">
+  <div data-vizbl-close-overlay></div>
+  <div>
+    <button type="button" aria-label="Close configurator" data-vizbl-close-overlay>×</button>
+    <iframe title="Vizbl Configurator" src="${CONFIGURATOR_URL}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </div>
+</div>
+
+<style>
+#vizbl-configurator-overlay{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .25s ease;}
+#vizbl-configurator-overlay.is-open{opacity:1;pointer-events:auto;}
+#vizbl-configurator-overlay>[data-vizbl-close-overlay]{position:absolute;inset:0;background:rgba(14,14,16,.72);}
+#vizbl-configurator-overlay>div:last-child{position:relative;width:min(1280px,96vw);height:min(88vh,920px);border-radius:16px;overflow:hidden;border:1px solid #2f2f34;box-shadow:0 28px 50px rgba(0,0,0,.35);background:#121316;}
+#vizbl-configurator-overlay iframe{width:100%;height:100%;border:0;}
+#vizbl-configurator-overlay button[data-vizbl-close-overlay]{position:absolute;top:.8rem;right:.8rem;z-index:2;border:1px solid rgba(255,255,255,.3);width:38px;height:38px;border-radius:50%;background:rgba(15,15,16,.7);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer;}
+@media (max-width:640px){#vizbl-configurator-overlay>div:last-child{width:98vw;height:90vh;border-radius:10px;}}
+<\/style>
+
+<script>
+(() => {
+  if (window.__vizblOverlayInit) return;
+  window.__vizblOverlayInit = true;
+  const overlay = document.getElementById('vizbl-configurator-overlay');
+  const openButton = document.getElementById('vizbl-open-configurator');
+  const closeButtons = overlay?.querySelectorAll('[data-vizbl-close-overlay]') || [];
+  const openOverlay = () => { overlay.classList.add('is-open'); overlay.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; };
+  const closeOverlay = () => { overlay.classList.remove('is-open'); overlay.setAttribute('aria-hidden','true'); document.body.style.overflow=''; };
+  openButton?.addEventListener('click', openOverlay);
+  closeButtons.forEach((button) => button.addEventListener('click', closeOverlay));
+  window.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeOverlay(); });
+})();
+<\/script>`,
         },
       ],
     },
     embedded: {
       title: 'Embedded Integration Guide (Shopify)',
-      description: 'This method renders the configurator directly inside your product layout.',
+      description: 'Best when you want the configurator visible directly inside the product page layout.',
       steps: [
-        'Add the Custom Liquid snippet where the embedded configurator should be displayed.',
-        'Save and publish. No global theme.liquid script is required for this method.',
+        'Open your product template in Shopify Theme Editor.',
+        'Add one Custom Liquid block and paste Part 1 code.',
+        'Save and check that the embedded iframe loads correctly on desktop and mobile.',
       ],
       sections: [
         {
-          label: 'Part 1 — Custom Liquid block (product page)',
+          label: 'Part 1 — Custom Liquid block (embedded iframe)',
           code: `<iframe src="${CONFIGURATOR_URL}" title="Embedded Vizbl Configurator" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" style="width:100%;min-height:700px;border:0;"></iframe>`,
         },
       ],
@@ -103,7 +140,7 @@
       <h1>${escapeHtml(guide.title)}</h1>
       <p>${escapeHtml(guide.description)}</p>
       <div class="note">
-        <strong>Client instructions</strong>
+        <strong>Installation steps</strong>
         <ol>${steps}</ol>
         <p style="margin-top:10px;">Configurator URL: <a href="${CONFIGURATOR_URL}" target="_blank" rel="noopener noreferrer">${CONFIGURATOR_URL}</a></p>
       </div>
