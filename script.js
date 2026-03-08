@@ -44,6 +44,8 @@
 
   const embeddedCode = `<iframe src="${CONFIGURATOR_URL}" title="Embedded Vizbl Configurator" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" style="width:100%;min-height:700px;border:0;"></iframe>`;
 
+  const iframeThemeLiquidCode = `${iframeOverlayContainerCode}\n\n${iframeOverlayScriptCode}`;
+
   const guides = {
     redirect: {
       title: 'Redirect Integration Guide (Shopify)',
@@ -51,13 +53,12 @@
       steps: [
         {
           title: 'Step 1 — Add the product-page button',
-          description: 'Open the product template in Shopify Theme Editor and add a Custom Liquid block.',
+          description: 'Open the product template in Shopify Theme Editor, add a Custom Liquid block, and paste this code.',
           code: redirectButtonCode,
         },
         {
           title: 'Step 2 — Save and test',
-          description: 'Keep this same code and verify that the button opens Vizbl in a new tab.',
-          code: redirectButtonCode,
+          description: 'Save the template and open the product page to verify the button opens the configurator in a new tab.',
         },
       ],
     },
@@ -66,19 +67,18 @@
       description: 'Follow these steps in order. Each step matches one code block.',
       steps: [
         {
-          title: 'Step 1 — Add the product-page button',
-          description: 'In a product Custom Liquid block, add the button code.',
+          title: 'Step 1 — Add button code',
+          description: 'In a product Custom Liquid block, paste this button code.',
           code: iframeButtonCode,
         },
         {
-          title: 'Step 2 — Add overlay container and styles',
-          description: 'In theme.liquid (before </body>), add the overlay HTML and style block.',
-          code: iframeOverlayContainerCode,
+          title: 'Step 2 — Add overlay code to theme.liquid',
+          description: 'In theme.liquid, right before </body>, paste this full overlay block (container, styles, and script).',
+          code: iframeThemeLiquidCode,
         },
         {
-          title: 'Step 3 — Add the overlay script',
-          description: 'Right below Step 2 code in theme.liquid, add this script block.',
-          code: iframeOverlayScriptCode,
+          title: 'Step 3 — Save and test',
+          description: 'Save theme files and test open/close behavior using button click, close icon, backdrop click, and Escape key.',
         },
       ],
     },
@@ -88,13 +88,12 @@
       steps: [
         {
           title: 'Step 1 — Add embedded iframe block',
-          description: 'Open the product template and add a Custom Liquid block where configurator should appear.',
+          description: 'Open the product template, add a Custom Liquid block, and paste this iframe code.',
           code: embeddedCode,
         },
         {
           title: 'Step 2 — Save and test',
-          description: 'Keep this same code and verify the iframe is visible on the product page.',
-          code: embeddedCode,
+          description: 'Save the template and verify the iframe loads correctly on the product page.',
         },
       ],
     },
@@ -109,19 +108,23 @@
 
   const buildGuideDocument = (guide) => {
     const stepCards = guide.steps
-      .map(
-        (step, index) => `
+      .map((step, index) => {
+        const codeHtml = step.code
+          ? `<button class="copy-btn" type="button" data-copy-target="code-${index}">Copy this code</button>
+            <pre id="code-${index}"><code>${escapeHtml(step.code)}</code></pre>`
+          : `<p class="no-code">No code needed for this step.</p>`;
+
+        return `
           <section class="card">
             <div class="step-head">
               <span class="step-badge">${index + 1}</span>
               <h3>${escapeHtml(step.title)}</h3>
             </div>
             <p class="step-description">${escapeHtml(step.description)}</p>
-            <button class="copy-btn" type="button" data-copy-target="code-${index}">Copy this code</button>
-            <pre id="code-${index}"><code>${escapeHtml(step.code)}</code></pre>
+            ${codeHtml}
           </section>
-        `
-      )
+        `;
+      })
       .join('');
 
     return `<!doctype html>
@@ -148,6 +151,7 @@
       pre::-webkit-scrollbar-thumb { background: #4b4b4b; border-radius: 999px; }
       pre::-webkit-scrollbar-track { background: #1b1b1b; border-radius: 999px; }
       .status { min-height: 1.2em; color: #52545a; font-size: 13px; margin-top: 10px; }
+      .no-code { margin: 0; padding: 10px 12px; border-radius: 8px; background: #f3f3f2; color: #4f5258; font-size: 13px; }
       a { color: #1d1d1f; }
     </style>
   </head>
