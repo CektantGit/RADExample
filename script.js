@@ -1,8 +1,52 @@
 (() => {
   const snippets = {
     redirect: `<a href="https://configurator.vizbl.com/0affd758-2fd5-423c-b628-b9b726965c45" target="_blank" rel="noopener noreferrer">Open Configurator</a>`,
-    'iframe-overlay': `<button id="open-configurator">Open Configurator</button>\n<div id="vizbl-overlay" hidden>\n  <button id="close-configurator" aria-label="Close configurator">×</button>\n  <iframe src="https://configurator.vizbl.com/0affd758-2fd5-423c-b628-b9b726965c45" title="Vizbl Configurator"></iframe>\n</div>\n<script>\n  const overlay = document.getElementById('vizbl-overlay');\n  document.getElementById('open-configurator').addEventListener('click', () => overlay.hidden = false);\n  document.getElementById('close-configurator').addEventListener('click', () => overlay.hidden = true);\n<\/script>`,
-    embedded: `<iframe\n  src="https://configurator.vizbl.com/0affd758-2fd5-423c-b628-b9b726965c45"\n  title="Embedded Vizbl Configurator"\n  loading="lazy"\n  referrerpolicy="strict-origin-when-cross-origin"\n  style="width:100%;min-height:700px;border:0;"\n></iframe>`,
+    'iframe-overlay': `<button type="button" data-open-overlay>Open Configurator</button>
+
+<div class="overlay" id="configurator-overlay" aria-hidden="true" role="dialog" aria-label="Configurator overlay">
+  <div class="overlay-backdrop" data-close-overlay></div>
+  <div class="overlay-panel">
+    <button class="overlay-close" type="button" aria-label="Close configurator" data-close-overlay>×</button>
+    <iframe
+      title="Vizbl Configurator"
+      src="https://configurator.vizbl.com/0affd758-2fd5-423c-b628-b9b726965c45"
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+    ></iframe>
+  </div>
+</div>
+
+<script>
+  const overlay = document.getElementById('configurator-overlay');
+  const openButton = document.querySelector('[data-open-overlay]');
+  const closeButtons = overlay.querySelectorAll('[data-close-overlay]');
+
+  const openOverlay = () => {
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeOverlay = () => {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  openButton?.addEventListener('click', openOverlay);
+  closeButtons.forEach((button) => button.addEventListener('click', closeOverlay));
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeOverlay();
+  });
+<\/script>`,
+    embedded: `<iframe
+  src="https://configurator.vizbl.com/0affd758-2fd5-423c-b628-b9b726965c45"
+  title="Embedded Vizbl Configurator"
+  loading="lazy"
+  referrerpolicy="strict-origin-when-cross-origin"
+  style="width:100%;min-height:700px;border:0;"
+></iframe>`,
   };
 
   const statusEl = document.querySelector('[data-copy-status]');
