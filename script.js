@@ -6,8 +6,8 @@
       title: 'Redirect Integration Guide (Shopify)',
       description: 'This method opens the configurator in a new tab from a product-page button.',
       steps: [
-        'Step 1: Add the Custom Liquid snippet on the product template where the CTA should appear.',
-        'Step 2: Save and publish. No global theme.liquid script is required for this method.',
+        'Add the Custom Liquid snippet on the product template where the button should appear.',
+        'Save and publish. No global theme.liquid script is required for this method.',
       ],
       sections: [
         {
@@ -20,9 +20,9 @@
       title: 'iFrame Overlay Integration Guide (Shopify)',
       description: 'This method keeps users on the same page and opens the configurator in a full-screen overlay modal.',
       steps: [
-        'Step 1: Add Part 2 once in theme.liquid before </body>.',
-        'Step 2: Add Part 1 via Custom Liquid block on any product page where you need the CTA.',
-        'Step 3: Save both files and test on storefront.',
+        'Add Part 2 once in theme.liquid before </body>.',
+        'Add Part 1 via Custom Liquid block on any product page where you need the button.',
+        'Save both files and test on storefront.',
       ],
       sections: [
         {
@@ -39,8 +39,8 @@
       title: 'Embedded Integration Guide (Shopify)',
       description: 'This method renders the configurator directly inside your product layout.',
       steps: [
-        'Step 1: Add the Custom Liquid snippet where the embedded configurator should be displayed.',
-        'Step 2: Save and publish. No global theme.liquid script is required for this method.',
+        'Add the Custom Liquid snippet where the embedded configurator should be displayed.',
+        'Save and publish. No global theme.liquid script is required for this method.',
       ],
       sections: [
         {
@@ -89,7 +89,11 @@
       .card { background: #fff; border: 1px solid #e6e5e2; border-radius: 14px; padding: 14px; margin-bottom: 14px; }
       .card h3 { margin: 0 0 10px; font-size: 16px; }
       .copy-btn { background: #111; color: #fff; border: 0; border-radius: 8px; padding: 8px 12px; font-weight: 600; cursor: pointer; margin-bottom: 10px; }
-      pre { margin: 0; background: #111; color: #f2f2f2; border-radius: 10px; padding: 12px; overflow: auto; font-size: 12px; line-height: 1.45; }
+      pre { margin: 0; background: #111; color: #f2f2f2; border-radius: 10px; padding: 12px; overflow: auto; max-height: min(46vh, 420px); font-size: 12px; line-height: 1.45; border: 1px solid #2c2c2c; }
+      pre code { display: block; min-width: max-content; }
+      pre::-webkit-scrollbar { height: 10px; width: 10px; }
+      pre::-webkit-scrollbar-thumb { background: #4b4b4b; border-radius: 999px; }
+      pre::-webkit-scrollbar-track { background: #1b1b1b; border-radius: 999px; }
       .status { min-height: 1.2em; color: #52545a; font-size: 13px; margin-top: 10px; }
       a { color: #1d1d1f; }
     </style>
@@ -162,7 +166,7 @@
         #integration-guide-overlay { position: fixed; inset: 0; z-index: 2147483647; display: grid; place-items: center; opacity: 0; pointer-events: none; transition: opacity .2s ease; }
         #integration-guide-overlay.is-open { opacity: 1; pointer-events: auto; }
         #integration-guide-overlay .guide-backdrop { position: absolute; inset: 0; background: rgba(14,14,16,.74); }
-        #integration-guide-overlay .guide-panel { position: relative; width: min(1200px, 96vw); height: min(92vh, 960px); background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,.35); }
+        #integration-guide-overlay .guide-panel { position: relative; width: min(1200px, 96vw); height: min(94vh, 980px); background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,.35); }
         #integration-guide-overlay iframe { width: 100%; height: 100%; border: 0; background: #fff; }
         #integration-guide-overlay .guide-close { position: absolute; right: 10px; top: 10px; z-index: 2; width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.45); background: rgba(0,0,0,.62); color: #fff; font-size: 22px; cursor: pointer; }
       `;
