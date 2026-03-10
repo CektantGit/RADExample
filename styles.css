@@ -223,7 +223,6 @@ h1 {
 
 .single-column .product-grid {
   grid-template-columns: 1fr;
-  max-width: 760px;
 }
 
 .product-details,
